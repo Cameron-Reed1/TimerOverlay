@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Utility;
+Comment[en_US]=Timer osd controlled with global shortcuts
+Comment=Timer osd controlled with global shortcuts
+Exec=timer_overlay
+GenericName[en_US]=Overlay
+GenericName=Overlay
+MimeType=
+Name[en_US]=Timer Overlay
+Name=Timer Overlay
+NoDisplay=false
+Path=/usr/bin
+SingleMainWindow=true
+StartupNotify=false
+StartupWMClass=timer-overlay
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
