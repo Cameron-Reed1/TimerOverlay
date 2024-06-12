@@ -31,14 +31,6 @@ make
 
 
 
-# Configuring
-In the future, there will be a configuration file to configure the position, size, and font. However, when running under Wayland,
-the requested position of the window will not be respected, so to set the position, as well as removing window decorations, and
-preventing the window from stealing focus when it is opened, you will need to set window rules. You can see the rules I use below:
-![window rules](https://cam123.dev/files/hidden/images/window_rules.png)
-
-
-
 # Installing
 Installation is likewise very simple, simply run:
 ```
@@ -47,6 +39,14 @@ sudo make install
 
 There is also a desktop file provided that you may want to install to /usr/share/applications/, ~/.local/share/applications/, or ~/.config/autostart,
 but that is left up to you
+
+
+
+# Configuring
+In the future, there will be a configuration file to configure the position, size, and font. However, when running under Wayland,
+the requested position of the window will not be respected, so to set the position, as well as removing window decorations, and
+preventing the window from stealing focus when it is opened, you will need to set window rules. You can see the rules I use below:
+![window rules](https://cam123.dev/files/hidden/images/window_rules.png)
 
 
 
