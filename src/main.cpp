@@ -18,6 +18,7 @@
 #include "character_utils.h"
 #include "shortcuts.h"
 #include "timer.h"
+#include "config.h"
 
 
 void error_callback(int error, const char* description)
@@ -27,6 +28,8 @@ void error_callback(int error, const char* description)
 
 int main()
 {
+    Config cfg = readConfig(getConfigPath("timer_overlay"));
+
     std::cout << glfwGetVersionString() << std::endl;
     glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_WAYLAND);
 
@@ -46,8 +49,8 @@ int main()
     glfwWindowHint(GLFW_SCALE_FRAMEBUFFER, GLFW_TRUE);
     glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
     glfwWindowHint(GLFW_MOUSE_PASSTHROUGH, GLFW_TRUE);
-    glfwWindowHint(GLFW_POSITION_X, 200);
-    glfwWindowHint(GLFW_POSITION_Y, 10);
+    glfwWindowHint(GLFW_POSITION_X, cfg.pos_x);
+    glfwWindowHint(GLFW_POSITION_Y, cfg.pos_y);
     glfwWindowHintString(GLFW_WAYLAND_APP_ID, "timer-overlay");
     glfwWindowHintString(GLFW_X11_CLASS_NAME, "timer-overlay");
     glfwWindowHintString(GLFW_X11_INSTANCE_NAME, "timer-overlay");
@@ -83,8 +86,8 @@ int main()
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
 
-    Font NotoSans("/usr/share/fonts/noto/NotoSans-Regular.ttf");
-    if (NotoSans.LoadError) {
+    Font font(cfg.font.c_str());
+    if (font.LoadError) {
         return -1;
     }
 
@@ -164,7 +167,7 @@ int main()
         }
         
         if (!time_diff.negative || (time_diff.seconds_absolute < 3 && time_diff.milliseconds > 500)) {
-            NotoSans.RenderText(VAO, VBO, shaderProgram, buf, 0.0f, 10.0f, 1.0f);
+            font.RenderText(VAO, VBO, shaderProgram, buf, 0.0f, 10.0f, 1.0f);
         } else {
             usleep(500);
         }

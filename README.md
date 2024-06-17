@@ -43,9 +43,16 @@ but that is left up to you
 
 
 # Configuring
-In the future, there will be a configuration file to configure the position, size, and font. However, when running under Wayland,
-the requested position of the window will not be respected, so to set the position, as well as removing window decorations, and
-preventing the window from stealing focus when it is opened, you will need to set window rules. You can see the rules I use below:
+You can configure the position the window requests and the font that is used using a config file at $XDG_CONFIG_HOME/timer_overlay/config.txt or
+~/.config/timer_overlay/config.txt. The syntax looks like:
+```
+POSX=300
+POSY=30
+FONT=/usr/share/fonts/noto/NotoSans-Bold.ttf
+```
+However, when running under Wayland, the requested position of the window will not be respected, so to set the position, as well
+as removing window decorations, and preventing the window from stealing focus when it is opened, you will need to set window rules.
+You can see the rules I use below:
 ![window rules](https://cam123.dev/files/hidden/images/window_rules.png)
 
 
