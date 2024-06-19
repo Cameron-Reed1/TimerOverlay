@@ -64,6 +64,10 @@ int main()
     }
     glfwMakeContextCurrent(window);
 
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    glViewport(0, 0, width, height);
+
     glewExperimental = GL_TRUE;
     int err = glewInit();
     if (err != GLEW_OK) {
