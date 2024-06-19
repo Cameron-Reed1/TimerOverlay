@@ -16,11 +16,11 @@ class Font
 {
 public:
     Font() = delete;
-    Font(const char* font);
+    Font(const char* font, FT_UInt size);
     void RenderText(GLuint VAO, GLuint VBO, GLuint shaderProgram, const char* text, float x, float y, float scale);
 
 private:
-    void SetupCharMap(FT_Face& face);
+    void SetupCharMap(FT_Face& face, FT_UInt size);
 
 public:
     bool LoadError;

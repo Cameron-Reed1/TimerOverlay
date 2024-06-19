@@ -23,7 +23,7 @@
 #include "character_utils.h"
 
 
-Font::Font(const char* font)
+Font::Font(const char* font, FT_UInt size)
     : LoadError(false), m_Characters()
 {
     FT_Library ft;
@@ -41,17 +41,17 @@ Font::Font(const char* font)
         return;
     }
 
-    SetupCharMap(face);
+    SetupCharMap(face, size);
 
     FT_Done_Face(face);
     FT_Done_FreeType(ft);
 }
 
-void Font::SetupCharMap(FT_Face &face)
+void Font::SetupCharMap(FT_Face &face, FT_UInt size)
 {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // disable byte-alignment restriction
 
-    FT_Set_Pixel_Sizes(face, 0, 48);
+    FT_Set_Pixel_Sizes(face, 0, size);
 
     for (unsigned char c = 0; c < 128; c++) {
         // load character glyph

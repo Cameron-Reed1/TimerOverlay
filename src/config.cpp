@@ -131,6 +131,8 @@ Config readConfig(std::filesystem::path config_path)
             config.pos_y = std::stoi(value);
         } else if (name == "FONT") {
             config.font = value;
+        } else if (name == "FONT_SIZE") {
+            config.font_size = std::stoi(value);
         } else {
             std::cerr << "Warning: Invalid line in config file" << std::endl;
             std::cerr << line_num << " | " << line << std::endl;

@@ -49,6 +49,7 @@ You can configure the position the window requests and the font that is used usi
 POSX=300
 POSY=30
 FONT=/usr/share/fonts/noto/NotoSans-Bold.ttf
+FONT_SIZE=48
 ```
 However, when running under Wayland, the requested position of the window will not be respected, so to set the position, as well
 as removing window decorations, and preventing the window from stealing focus when it is opened, you will need to set window rules.

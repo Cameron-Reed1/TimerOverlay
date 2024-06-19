@@ -8,6 +8,7 @@ struct Config
     uint32_t pos_x = 10;
     uint32_t pos_y = 25;
     std::string font = "/usr/share/fonts/noto/NotoSans-Regular.ttf";
+    uint16_t font_size = 32;
 };
 
 

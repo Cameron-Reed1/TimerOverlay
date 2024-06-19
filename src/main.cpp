@@ -90,7 +90,7 @@ int main()
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
 
-    Font font(cfg.font.c_str());
+    Font font(cfg.font.c_str(), cfg.font_size);
     if (font.LoadError) {
         return -1;
     }
