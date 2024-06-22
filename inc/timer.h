@@ -29,3 +29,22 @@ private:
     std::chrono::system_clock::time_point end_time;
 };
 
+class StopWatch
+{
+public:
+    StopWatch();
+    TimeDuration GetTime();
+    void Start();
+    void Pause();
+    void Resume();
+    void Clear();
+
+public:
+    bool active = false;
+
+private:
+    std::chrono::system_clock::time_point start_time;
+    std::chrono::system_clock::duration paused_duration;
+    bool paused = false;
+};
+

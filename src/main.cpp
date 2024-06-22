@@ -107,6 +107,7 @@ int main()
     glBindVertexArray(0);
 
     Timer timer;
+    StopWatch stopwatch;
     GlobalShortcuts shortcuts("timer_overlay");
 
     if (shortcuts.createSession() != 0) {
@@ -114,26 +115,34 @@ int main()
         glfwTerminate();
     }
 
-    shortcuts.addShortcut("time1", "Adds 1 minute to the timer", "ALT+F5", [](void* timer_ptr)
-        {
+    shortcuts.addShortcut("time1", "Adds 1 minute to the timer", "ALT+F5", [](void* timer_ptr) {
             ((Timer*)timer_ptr)->AddMinutes(1);
         }, &timer);
-    shortcuts.addShortcut("time5", "Adds 5 minutes to the timer", "ALT+F6", [](void* timer_ptr)
-        {
+    shortcuts.addShortcut("time5", "Adds 5 minutes to the timer", "ALT+F6", [](void* timer_ptr) {
             ((Timer*)timer_ptr)->AddMinutes(5);
         }, &timer);
-    shortcuts.addShortcut("time15", "Adds 15 minutes to the timer", "ALT+F7", [](void* timer_ptr)
-        {
+    shortcuts.addShortcut("time15", "Adds 15 minutes to the timer", "ALT+F7", [](void* timer_ptr) {
             ((Timer*)timer_ptr)->AddMinutes(15);
         }, &timer);
-    shortcuts.addShortcut("time60", "Adds 1 hour to the timer", "ALT+F8", [](void* timer_ptr)
-        {
+    shortcuts.addShortcut("time60", "Adds 1 hour to the timer", "ALT+F8", [](void* timer_ptr) {
             ((Timer*)timer_ptr)->AddMinutes(60);
         }, &timer);
-    shortcuts.addShortcut("timeclear", "Clears the timer", "ALT+F9", [](void* timer_ptr)
-        {
+    shortcuts.addShortcut("timeclear", "Clears the timer", "ALT+F9", [](void* timer_ptr) {
             ((Timer*)timer_ptr)->Clear();
         }, &timer);
+
+    shortcuts.addShortcut("swstart", "Starts the stopwatch", "CTRL+F5", [](void* stopwatch_ptr) {
+            ((StopWatch*)stopwatch_ptr)->Start();
+        }, &stopwatch);
+    shortcuts.addShortcut("swclear", "Clears the stopwatch", "CTRL+F6", [](void* stopwatch_ptr) {
+            ((StopWatch*)stopwatch_ptr)->Clear();
+        }, &stopwatch);
+    shortcuts.addShortcut("swpause", "Pauses the stopwatch", "CTRL+F7", [](void* stopwatch_ptr) {
+            ((StopWatch*)stopwatch_ptr)->Pause();
+        }, &stopwatch);
+    shortcuts.addShortcut("swresume", "Resumes the stopwatch", "CTRL+F8", [](void* stopwatch_ptr) {
+            ((StopWatch*)stopwatch_ptr)->Resume();
+        }, &stopwatch);
 
     if (!shortcuts.alreadyBound()) {
         std::cout << "Requsting to bind keys" << std::endl;
@@ -154,7 +163,7 @@ int main()
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        TimeDuration time_diff = timer.GetTimeLeft();
+        TimeDuration time_diff = stopwatch.active ? stopwatch.GetTime() : timer.GetTimeLeft();
         if (time_diff.seconds == last_frame_seconds && !time_diff.negative) {
             continue;
         }
